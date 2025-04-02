@@ -10,21 +10,26 @@
         Title="MainMenu" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="11*"/>
+            <RowDefinition Height="9*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="ExitBtn" Grid.Column="2" HorizontalAlignment="Left" Margin="225,5,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Click="ExitBtn_Click">
+        <Button x:Name="ExitBtn" Grid.Column="2" HorizontalAlignment="Left" Margin="225,5,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Click="ExitBtn_Click" Height="30" Width="37">
             <Image Source="/ResFolder/cross.png" Height="26" Width="33" RenderTransformOrigin="0.46,0.923" />
         </Button>
         <Button x:Name="MinimizeBtn" Grid.Column="2" HorizontalAlignment="Left" Margin="172,0,0,0" VerticalAlignment="Top" Height="35" Width="48" BorderBrush="{x:Null}" Background="{x:Null}" Click="MinimizeBtn_Click">
             <Image Source="/ResFolder/minimize.png" Height="25" Width="42" />
         </Button>
+        <Button Style="{DynamicResource ButtonStyle1}" x:Name="StaffBtn" Grid.Column="2" Content="Сотрудники" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" Background="#FF4AD01B" FontSize="16" Height="25" Width="91"/>
+        <Image HorizontalAlignment="Left" Height="119" Margin="10,10,0,0" VerticalAlignment="Top" Width="117" Source="/ResFolder/cross.png"/>
+        <Button Style="{DynamicResource ButtonStyle2}" Content="Успеваемость" HorizontalAlignment="Left" Margin="27,34,0,0" Grid.Row="1" VerticalAlignment="Top" Width="83" Height="28"/>
+        <Button Content="Задолжники" HorizontalAlignment="Left" Margin="27,82,0,0" Grid.Row="1" VerticalAlignment="Top" Width="83" Height="28"/>
+        <Button Content="Дисциплины" HorizontalAlignment="Left" Margin="27,127,0,0" Grid.Row="1" VerticalAlignment="Top" Width="83" Height="28"/>
 
     </Grid>
 </Window>

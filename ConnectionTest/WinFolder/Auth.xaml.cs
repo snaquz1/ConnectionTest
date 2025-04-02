@@ -23,5 +23,11 @@ namespace ConnectionTest.WinFoler
         {
             InitializeComponent();
         }
+
+        private void LoginBtn_Click(object sender, RoutedEventArgs e)
+        {
+            new MainMenu().Show();
+            this.Close();
+        }
     }
 }
