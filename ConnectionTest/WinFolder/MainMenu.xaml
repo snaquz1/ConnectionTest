@@ -16,20 +16,34 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="ExitBtn" Grid.Column="2" HorizontalAlignment="Left" Margin="225,5,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Click="ExitBtn_Click" Height="30" Width="37">
+        <Button x:Name="ExitBtn" Grid.Column="3" HorizontalAlignment="Left" Margin="225,5,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Click="ExitBtn_Click" Height="30" Width="37">
             <Image Source="/ResFolder/cross.png" Height="26" Width="33" RenderTransformOrigin="0.46,0.923" />
         </Button>
-        <Button x:Name="MinimizeBtn" Grid.Column="2" HorizontalAlignment="Left" Margin="172,0,0,0" VerticalAlignment="Top" Height="35" Width="48" BorderBrush="{x:Null}" Background="{x:Null}" Click="MinimizeBtn_Click">
+        <Button x:Name="MinimizeBtn" Grid.Column="3" HorizontalAlignment="Left" Margin="172,0,0,0" VerticalAlignment="Top" Height="35" Width="48" BorderBrush="{x:Null}" Background="{x:Null}" Click="MinimizeBtn_Click">
             <Image Source="/ResFolder/minimize.png" Height="25" Width="42" />
         </Button>
-        <Button Style="{DynamicResource ButtonStyle1}" x:Name="StaffBtn" Grid.Column="2" Content="Сотрудники" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" Background="#FF4AD01B" FontSize="16" Height="25" Width="91"/>
-        <Image HorizontalAlignment="Left" Height="119" Margin="10,10,0,0" VerticalAlignment="Top" Width="117" Source="/ResFolder/cross.png"/>
-        <Button Style="{DynamicResource ButtonStyle2}" Content="Успеваемость" HorizontalAlignment="Left" Margin="27,34,0,0" Grid.Row="1" VerticalAlignment="Top" Width="83" Height="28"/>
-        <Button Content="Задолжники" HorizontalAlignment="Left" Margin="27,82,0,0" Grid.Row="1" VerticalAlignment="Top" Width="83" Height="28"/>
-        <Button Content="Дисциплины" HorizontalAlignment="Left" Margin="27,127,0,0" Grid.Row="1" VerticalAlignment="Top" Width="83" Height="28"/>
+        <Button Template="{DynamicResource ButtonTemplateRounded}" x:Name="StaffBtn" Grid.Column="3" Content="Сотрудники" HorizontalAlignment="Left" Margin="95,46,0,0" VerticalAlignment="Top" Background="#FF4AD01B" FontSize="16" Height="27" Width="94"/>
+        <Button Template="{DynamicResource ButtonTemplateRounded}" Style="{DynamicResource ButtonStyle2}" Content="Успеваемость" HorizontalAlignment="Left" Margin="27,34,0,0" Grid.Row="1" VerticalAlignment="Top" Width="83" Height="28"/>
+        <Button Template="{DynamicResource ButtonTemplateRounded}" Content="Задолжники" HorizontalAlignment="Left" Margin="27,82,0,0" Grid.Row="1" VerticalAlignment="Top" Width="83" Height="28"/>
+        <Button Template="{DynamicResource ButtonTemplateRounded}" Content="Дисциплины" HorizontalAlignment="Left" Margin="27,127,0,0" Grid.Row="1" VerticalAlignment="Top" Width="83" Height="28"/>
+        <TextBlock HorizontalAlignment="Left" Margin="201,49,0,0" TextWrapping="Wrap" Text="Поиск:" VerticalAlignment="Top" Width="66" FontSize="14" Grid.ColumnSpan="3"/>
+        <TextBox Style="{DynamicResource TextBoxStyleRounded}" x:Name="___Без_имени_" Grid.Column="2" HorizontalAlignment="Left" Margin="0,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="256" Height="23" BorderBrush="#FF3BB52A"/>
+        <TextBox Style="{DynamicResource TextBoxStyleRounded}" Grid.Column="3" HorizontalAlignment="Left" Margin="4,49,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="73"/>
+        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Students}" Grid.ColumnSpan="4" Margin="181,110,65,40" Grid.RowSpan="3">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="№П/П" Binding="{Binding Number}" Width="*"/>
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" Width="*"/>
+                <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" Width="*"/>
+                <DataGridTextColumn Header="Отчество" Binding="{Binding MiddleName}" Width="*"/>
+                <DataGridTextColumn Header="Группа" Binding="{Binding Group}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+<Image Source="/ResFolder/logo.png" Margin="9,8,95,157" Grid.RowSpan="2" />
+
 
     </Grid>
 </Window>
