@@ -32,7 +32,7 @@
         <Button Template="{DynamicResource ButtonTemplateRounded}" Content="Дисциплины" HorizontalAlignment="Left" Margin="27,127,0,0" Grid.Row="1" VerticalAlignment="Top" Width="83" Height="28"/>
         <TextBlock HorizontalAlignment="Left" Margin="201,49,0,0" TextWrapping="Wrap" Text="Поиск:" VerticalAlignment="Top" Width="66" FontSize="14" Grid.ColumnSpan="3"/>
         <TextBox Style="{DynamicResource TextBoxStyleRounded}" x:Name="___Без_имени_" Grid.Column="2" HorizontalAlignment="Left" Margin="0,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="256" Height="23" BorderBrush="#FF3BB52A"/>
-        <TextBox Style="{DynamicResource TextBoxStyleRounded}" Grid.Column="3" HorizontalAlignment="Left" Margin="4,49,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="73"/>
+        <TextBox Style="{DynamicResource TextBoxStyleRounded}" Grid.Column="3" HorizontalAlignment="Left" Margin="4,49,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="73" BorderBrush="#FF3BB52A"/>
         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Students}" Grid.ColumnSpan="4" Margin="181,110,65,40" Grid.RowSpan="3">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="№П/П" Binding="{Binding Number}" Width="*"/>
