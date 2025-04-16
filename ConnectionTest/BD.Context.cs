@@ -15,17 +15,9 @@ namespace ConnectionTest
     
     public partial class ConnectionTestEntities : DbContext
     {
-        private static ConnectionTestEntities _context;
         public ConnectionTestEntities()
             : base("name=ConnectionTestEntities")
         {
-        }
-
-        public static ConnectionTestEntities GetContext()
-        {
-            if(_context == null)
-                _context = new ConnectionTestEntities();
-            return _context;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

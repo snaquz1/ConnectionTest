@@ -69,6 +69,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BD.tt</DependentUpon>
     </Compile>
+    <Compile Include="ClassFolder\AppConnect.cs" />
     <Compile Include="Client.cs">
       <DependentUpon>BD.tt</DependentUpon>
     </Compile>
@@ -161,9 +162,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ClassFolder\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="BD.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
