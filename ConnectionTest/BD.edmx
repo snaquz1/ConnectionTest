@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище ConnectionTestModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище ConnectionTestModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Client">
           <Key>
             <PropertyRef Name="Id" />
@@ -19,9 +19,9 @@
         </EntityType>
         <EntityType Name="Role">
           <Key>
-            <PropertyRef Name="IdRole" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="IdRole" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Staff">
@@ -57,8 +57,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Username" Type="nvarchar" MaxLength="50" />
-          <Property Name="Password" Type="nvarchar" MaxLength="20" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="IdRole" Type="int" />
         </EntityType>
         <Association Name="FK_Client_User">
@@ -90,7 +90,7 @@
           <End Role="User" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Role">
-              <PropertyRef Name="IdRole" />
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="User">
               <PropertyRef Name="IdRole" />
@@ -116,11 +116,29 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ConnectionTestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ConnectionTestEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Client" EntityType="ConnectionTestModel.Client" />
+          <EntitySet Name="Role" EntityType="ConnectionTestModel.Role" />
+          <EntitySet Name="Staff" EntityType="ConnectionTestModel.Staff" />
+          <EntitySet Name="sysdiagrams" EntityType="ConnectionTestModel.sysdiagrams" />
+          <EntitySet Name="User" EntityType="ConnectionTestModel.User" />
+          <AssociationSet Name="FK_Client_User" Association="ConnectionTestModel.FK_Client_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="ConnectionTestModel.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_User" Association="ConnectionTestModel.FK_Staff_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Client">
           <Key>
             <PropertyRef Name="Id" />
@@ -132,15 +150,15 @@
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="Int64" />
           <Property Name="Adress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Client_User" FromRole="Client" ToRole="User" />
+          <NavigationProperty Name="User" Relationship="ConnectionTestModel.FK_Client_User" FromRole="Client" ToRole="User" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
-            <PropertyRef Name="IdRole" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="IdRole" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="User" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+          <NavigationProperty Name="User" Relationship="ConnectionTestModel.FK_User_Role" FromRole="Role" ToRole="User" />
         </EntityType>
         <EntityType Name="Staff">
           <Key>
@@ -159,13 +177,13 @@
           <Property Name="Inn" Type="Int64" />
           <Property Name="Snils" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="IdUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Staff_User" FromRole="Staff" ToRole="User" />
+          <NavigationProperty Name="User" Relationship="ConnectionTestModel.FK_Staff_User" FromRole="Staff" ToRole="User" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="principal_id" Type="Int32" Nullable="false" />
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
@@ -176,16 +194,16 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="IdRole" Type="Int32" />
-          <NavigationProperty Name="Client" Relationship="Self.FK_Client_User" FromRole="User" ToRole="Client" />
-          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
-          <NavigationProperty Name="Staff" Relationship="Self.FK_Staff_User" FromRole="User" ToRole="Staff" />
+          <NavigationProperty Name="Client" Relationship="ConnectionTestModel.FK_Client_User" FromRole="User" ToRole="Client" />
+          <NavigationProperty Name="Role" Relationship="ConnectionTestModel.FK_User_Role" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="Staff" Relationship="ConnectionTestModel.FK_Staff_User" FromRole="User" ToRole="Staff" />
         </EntityType>
         <Association Name="FK_Client_User">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <End Type="ConnectionTestModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="ConnectionTestModel.Client" Role="Client" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="Id" />
@@ -196,11 +214,11 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_Role">
-          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <End Type="ConnectionTestModel.Role" Role="Role" Multiplicity="0..1" />
+          <End Type="ConnectionTestModel.User" Role="User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Role">
-              <PropertyRef Name="IdRole" />
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="User">
               <PropertyRef Name="IdRole" />
@@ -208,8 +226,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Staff_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <End Type="ConnectionTestModel.User" Role="User" Multiplicity="1" />
+          <End Type="ConnectionTestModel.Staff" Role="Staff" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="Id" />
@@ -219,25 +237,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ConnectionTestEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Client" EntityType="Self.Client" />
-          <EntitySet Name="Role" EntityType="Self.Role" />
-          <EntitySet Name="Staff" EntityType="Self.Staff" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="User" EntityType="Self.User" />
-          <AssociationSet Name="FK_Client_User" Association="Self.FK_Client_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Client" EntitySet="Client" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
-            <End Role="Role" EntitySet="Role" />
-            <End Role="User" EntitySet="User" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Staff_User" Association="Self.FK_Staff_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Staff" EntitySet="Staff" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -247,61 +246,61 @@
           <EntitySetMapping Name="Client">
             <EntityTypeMapping TypeName="ConnectionTestModel.Client">
               <MappingFragment StoreEntitySet="Client">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Role">
             <EntityTypeMapping TypeName="ConnectionTestModel.Role">
               <MappingFragment StoreEntitySet="Role">
-                <ScalarProperty Name="IdRole" ColumnName="IdRole" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Staff">
             <EntityTypeMapping TypeName="ConnectionTestModel.Staff">
               <MappingFragment StoreEntitySet="Staff">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Age" ColumnName="Age" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Pasport" ColumnName="Pasport" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Adress" ColumnName="Adress" />
-                <ScalarProperty Name="Position" ColumnName="Position" />
-                <ScalarProperty Name="Inn" ColumnName="Inn" />
-                <ScalarProperty Name="Snils" ColumnName="Snils" />
                 <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="Snils" ColumnName="Snils" />
+                <ScalarProperty Name="Inn" ColumnName="Inn" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Pasport" ColumnName="Pasport" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="ConnectionTestModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="ConnectionTestModel.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="IdRole" ColumnName="IdRole" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

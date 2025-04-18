@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConnectionTest.ClassFolder;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,34 @@ namespace ConnectionTest.WinFoler
         public Registration()
         {
             InitializeComponent();
+            AppConnect.database = new ConnectionTestEntities();
+            
+        }
+
+        private void RegBtn_Click(object sender, RoutedEventArgs e)
+        {
+                if (AppConnect.database.User.Count(x => x.Username == TBLogin.Text) > 0)
+                {
+                    MessageBox.Show("Пользователь с таким логином уже есть");
+                    return;
+                }
+            try
+            {
+                User userObj = new User()
+                {
+                    Username = TBLogin.Text,
+                    Password = PBPassword.Password,
+                    IdRole = 2
+
+                };
+                AppConnect.database.User.Add(userObj);
+                AppConnect.database.SaveChanges();
+                MessageBox.Show("Данные успешно обновлены");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString() + ex.InnerException.ToString());
+            }
         }
     }
 }

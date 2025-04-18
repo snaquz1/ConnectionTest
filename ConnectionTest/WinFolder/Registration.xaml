@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ConnectionTest.WinFoler"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="Registration" Height="450" Width="450">
     <Grid>
         <Grid.RowDefinitions>
@@ -19,10 +20,11 @@
         </Grid.ColumnDefinitions>
 
         <Label Margin="11,10,11,88" Content="Регистрация" FontSize="20" Grid.Column="1"/>
-        <TextBox Style="{DynamicResource TextBoxStyleRounded}" Margin="0,108,0,5" Grid.Column="1"/>
+        <TextBox x:Name="TBLogin" Style="{DynamicResource TextBoxStyleRounded}" Margin="0,108,0,5" Grid.Column="1"/>
         <TextBlock HorizontalAlignment="Left" Margin="91,116,0,0" TextWrapping="Wrap" Text="Логин" VerticalAlignment="Top"/>
-        <TextBox Style="{DynamicResource TextBoxStyleRounded}" Margin="0,10,0,103" Grid.Column="1" Grid.Row="1"/>
+        <PasswordBox x:Name="PBPassword" Margin="0,10,0,103" Grid.Column="1" Grid.Row="1"/>
         <TextBlock HorizontalAlignment="Left" Margin="91,18,0,0" TextWrapping="Wrap" Text="Пароль" VerticalAlignment="Top" Grid.Row="1"/>
+        <Button x:Name="RegBtn" Grid.Column="1" Content="Зарегестрироваться" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Background="#FF5A72F5" BorderBrush="#FF169CBF" Height="30" Width="128" Click="RegBtn_Click"/>
 
     </Grid>
 </Window>
