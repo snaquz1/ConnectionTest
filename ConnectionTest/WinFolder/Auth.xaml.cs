@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConnectionTest.ClassFolder;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,22 @@ namespace ConnectionTest.WinFoler
 
         private void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                var userObj = AppConnect.database.User.FirstOrDefault(x => x.Username == LoginTB.Text && x.Password == PasswordPB.Password);
+                if (userObj == null)
+                {
+                    MessageBox.Show("Такого пользователя не существует");
+                }
+                else
+                {
+                    MessageBox.Show("Добро пожаловать " + userObj.Username);
+                }
+            }
+            catch (Exception ex) { 
+                MessageBox.Show(ex.Message); j
+            }
+
             new MainMenu().Show();
             this.Close();
         }

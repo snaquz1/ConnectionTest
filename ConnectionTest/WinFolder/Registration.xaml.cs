@@ -39,13 +39,13 @@ namespace ConnectionTest.WinFoler
                 User userObj = new User()
                 {
                     Username = TBLogin.Text,
-                    Password = PBPassword.Password,
-                    IdRole = 2
+                    Password = PBPassword.Password
 
                 };
                 AppConnect.database.User.Add(userObj);
                 AppConnect.database.SaveChanges();
                 MessageBox.Show("Данные успешно обновлены");
+                new MainMenu().Show();
             }
             catch (Exception ex)
             {
