@@ -46,11 +46,18 @@ namespace ConnectionTest.WinFoler
                 AppConnect.database.SaveChanges();
                 MessageBox.Show("Данные успешно обновлены");
                 new MainMenu().Show();
+                this.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString() + ex.InnerException.ToString());
             }
+        }
+
+        private void LoginBtn_Click(object sender, RoutedEventArgs e)
+        {
+            new Auth().Show();
+            this.Close();
         }
     }
 }

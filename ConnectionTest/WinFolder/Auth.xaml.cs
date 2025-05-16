@@ -37,13 +37,20 @@ namespace ConnectionTest.WinFoler
                 else
                 {
                     MessageBox.Show("Добро пожаловать " + userObj.Username);
+                    new MainMenu().Show();
                 }
             }
             catch (Exception ex) { 
-                MessageBox.Show(ex.Message); j
+                MessageBox.Show(ex.Message); 
             }
 
             new MainMenu().Show();
+            this.Close();
+        }
+
+        private void RegBtn_Click(object sender, RoutedEventArgs e)
+        {
+            new Registration().Show();
             this.Close();
         }
     }
